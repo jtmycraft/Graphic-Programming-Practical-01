@@ -14,7 +14,7 @@ float points[4][2] = {
 	{ -0.1f, 0.05f },{ 0.1f, 0.05f },{ 0.1f, -0.05f },{ -0.1f, -0.05f }
 };
 
-int num = 0;
+int page = 0;
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -34,10 +34,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			PostQuitMessage(0);
 			break;
 		case VK_LEFT:
-			num--;
+			page--;
 			break;
 		case VK_RIGHT:
-			num++;
+			page++;
 			break;
 		}
 		break;
@@ -93,10 +93,10 @@ void DrawCircle(float cx, float cy, float r, int num_segments) {
 	glEnd();
 }
 
-void drawCircle()
+void drawCircle(float radius)
 {
 	float x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-	float angle = 0, radius = 0.5;
+	float angle = 0;
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(x1, y1);
 
@@ -111,12 +111,18 @@ void drawCircle()
 
 void drawFlag(int num)
 {
+	if (num == -1)
+	{
+		page = 5;
+	}
+	if (num == 6)
+	{
+		page = 0;
+	}
+	num = 2;
+
 	switch (num)
 	{
-	case -1:
-		num = 5;
-
-		break;
 	case 0:
 		// Pahang
 		glBegin(GL_QUADS);
@@ -177,6 +183,7 @@ void drawFlag(int num)
 
 		break;
 	case 2:
+		// England
 		glBegin(GL_QUADS);
 		{
 			glColor3ub(255, 255, 255);
@@ -210,8 +217,94 @@ void drawFlag(int num)
 		}
 		glEnd();
 
+		// Shaded
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(-0.9f, -0.9f);
+			glVertex2f(0.9f, -0.9f);
+			glVertex2f(0.9f, -0.8f);
+			glVertex2f(-0.9f, -0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(-0.9f, 0.9f);
+			glVertex2f(0.9f, 0.9f);
+			glVertex2f(0.9f, 0.8f);
+			glVertex2f(-0.9f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(-0.9f, -0.8f);
+			glVertex2f(-0.8f, -0.8f);
+			glVertex2f(-0.8f, 0.8f);
+			glVertex2f(-0.9f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(0.9f, -0.8f);
+			glVertex2f(0.8f, -0.8f);
+			glVertex2f(0.8f, 0.8f);
+			glVertex2f(0.9f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(0.7f, 0.8f);
+			glVertex2f(0.8f, 0.7f);
+			glVertex2f(0.8f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(-0.7f, 0.8f);
+			glVertex2f(-0.8f, 0.7f);
+			glVertex2f(-0.8f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(-0.7f, -0.8f);
+			glVertex2f(-0.8f, -0.7f);
+			glVertex2f(-0.8f, -0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_TRIANGLES);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+
+			glVertex2f(0.7f, -0.8f);
+			glVertex2f(0.8f, -0.7f);
+			glVertex2f(0.8f, -0.8f);
+		}
+		glEnd();
+
 		break;
 	case 3:
+		// Scothland
 		glBegin(GL_QUADS);
 		{
 			glColor3ub(0, 183, 255);
@@ -250,8 +343,11 @@ void drawFlag(int num)
 		}
 		glEnd();
 
+		glRotatef(-90, 0, 0, 1);
+
 		break;
 	case 4:
+		// Japan
 		glBegin(GL_QUADS);
 		{
 			glColor3ub(255, 255, 255);
@@ -264,42 +360,263 @@ void drawFlag(int num)
 		glEnd();
 
 		glColor3ub(255, 0, 0);
-		drawCircle();
+		drawCircle(0.5);
 
 		break;
 	case 5:
+		// Face Blue
 		glPushMatrix();
-		glColor3ub(255, 255, 0);
-		DrawCircle(0, 0, 0.35f, 100);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.505);
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3ub(0, 229, 255);
+		drawCircle(0.5);
+		glPopMatrix();
+
+		// Face White
+		glPushMatrix();
+		glTranslatef(0, -0.09, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.415);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, -0.09, 0);
+		glColor3ub(255, 255, 255);
+		drawCircle(0.41);
+		glPopMatrix();
+
+		// Left Eye
+		glPushMatrix();
+		glTranslatef(-0.103, 0.32, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.105);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(-0.103, 0.32, 0);
+		glColor3ub(255, 255, 255);
+		drawCircle(0.10);
+		glPopMatrix();
+
+			// Pupil
+		glPushMatrix();
+		glTranslatef(-0.06, 0.32, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.033);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(-0.06, 0.32, 0);
+		glColor3ub(255, 255, 255);
+		drawCircle(0.015);
+		glPopMatrix();
+
+		// Right Eye
+		glPushMatrix();
+		glTranslatef(0.103, 0.32, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.105);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0.103, 0.32, 0);
+		glColor3ub(255, 255, 255);
+		drawCircle(0.10);
+		glPopMatrix();
+		
+			// Pupil
+		glPushMatrix();
+		glTranslatef(0.06, 0.32, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.033);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0.06, 0.32, 0);
+		glColor3ub(255, 255, 255);
+		drawCircle(0.015);
+		glPopMatrix();
+
+		// Nose
+		glPushMatrix();
+		glTranslatef(0, 0.2, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.06);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, 0.2, 0);
+		glColor3ub(255, 0, 0);
+		drawCircle(0.055);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0.02, 0.21, 0);
+		glColor3ub(255, 255, 255);
+		drawCircle(0.022);
+		glPopMatrix();
+
+		// Mouth
+		glLineWidth(1.5);
+
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0.145);
+		glVertex2f(0, -0.4);
+		glEnd();
+		glPopMatrix();
+
+
+			// Left
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(-0.09, 0, 0);
+		glRotatef(-90, 0, 0, 1);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0);
+		glVertex2f(0, -0.22);
+		glEnd();
 		glPopMatrix();
 
 		glPushMatrix();
 		glColor3ub(0, 0, 0);
-		glTranslatef(-0.15f, 0.1f, 0);
-		DrawCircle(0, 0, 0.01f, 100);
+		glTranslatef(-0.08, -0.05, 0);
+		glRotatef(-70, 0, 0, 1);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0);
+		glVertex2f(0, -0.22);
+		glEnd();
 		glPopMatrix();
 
 		glPushMatrix();
 		glColor3ub(0, 0, 0);
-		glTranslatef(0.15f, 0.1f, 0);
-		DrawCircle(0, 0, 0.01f, 100);
+		glTranslatef(-0.08, 0.05, 0);
+		glRotatef(-110, 0, 0, 1);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0);
+		glVertex2f(0, -0.22);
+		glEnd();
+		glPopMatrix();
+
+			// Right
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(0.09, 0, 0);
+		glRotatef(90, 0, 0, 1);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0);
+		glVertex2f(0, -0.22);
+		glEnd();
 		glPopMatrix();
 
 		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(0.08, -0.05, 0);
+		glRotatef(70, 0, 0, 1);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0);
+		glVertex2f(0, -0.22);
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(0.08, 0.05, 0);
+		glRotatef(110, 0, 0, 1);
+		glBegin(GL_LINE_STRIP);
+		glVertex2f(0, 0);
+		glVertex2f(0, -0.22);
+		glEnd();
+		glPopMatrix();
+
+			// Smile
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(0, -0.1, 0);
 		glRotatef(180, 1, 0, 0);
 		glBegin(GL_LINE_STRIP);
 		for (int ii = 0; ii < 100; ii++) {
-			float theta = 3.1415926f * float(ii) / float(100);//get the current angle 
-			float x = 0.3f * cosf(theta);//calculate the x component 
-			float y = 0.3f * sinf(theta);//calculate the y component 
+			float theta = 3.1415926f * float(ii) / float(100);//get the current angle
+			float x = 0.3f * cosf(theta);//calculate the x component
+			float y = 0.3f * sinf(theta);//calculate the y component
 			glVertex2f(x + 0, y + 0);//output vertex 
 		}
 		glEnd();
 		glPopMatrix();
 
-		break;
-	case 6:
-		num = 0;
+		// Belt
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(0, -0.51, 0);
+		glBegin(GL_QUADS);
+		glVertex2f(-0.3, 0);
+		glVertex2f(0.3, 0);
+		glVertex2f(0.3, 0.1);
+		glVertex2f(-0.3, 0.1);
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3ub(255, 0, 0);
+		glTranslatef(0, -0.515, 0);
+		glBegin(GL_QUADS);
+		glVertex2f(-0.295, 0.01);
+		glVertex2f(0.295, 0.01);
+		glVertex2f(0.295, 0.095);
+		glVertex2f(-0.295, 0.095);
+		glEnd();
+		glPopMatrix();
+
+		// Bell
+		glPushMatrix();
+		glTranslatef(0, -0.52, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.085);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, -0.52, 0);
+		glColor3ub(255, 255, 0);
+		drawCircle(0.08);
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3ub(0, 0, 0);
+		glTranslatef(0, -0.55, 0);
+		glBegin(GL_QUADS);
+		glVertex2f(-0.085, 0);
+		glVertex2f(0.085, 0);
+		glVertex2f(0.085, 0.05);
+		glVertex2f(-0.085, 0.05);
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glColor3ub(255, 255, 0);
+		glTranslatef(0, -0.55, 0);
+		glBegin(GL_QUADS);
+		glVertex2f(-0.08, 0.005);
+		glVertex2f(0.08, 0.005);
+		glVertex2f(0.08, 0.045);
+		glVertex2f(-0.08, 0.045);
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, -0.58, 0);
+		glColor3ub(0, 0, 0);
+		drawCircle(0.025);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, -0.58, 0);
+		glColor3ub(161, 110, 0);
+		drawCircle(0.02);
+		glPopMatrix();
 
 		break;
 	}
@@ -310,7 +627,10 @@ void display()
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(0.55f, 0.55f, 0.55f, 0);
 
-	drawFlag(num);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+	drawFlag(page);
 }
 
 //--------------------------------------------------------------------
