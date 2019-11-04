@@ -119,7 +119,6 @@ void drawFlag(int num)
 	{
 		page = 0;
 	}
-	num = 2;
 
 	switch (num)
 	{
