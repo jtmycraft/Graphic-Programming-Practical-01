@@ -5,7 +5,7 @@
 #include <conio.h>
 #include <string>
 
-//#pragma comment (lib, "OpenGL32.lib")
+#pragma comment (lib, "OpenGL32.lib")
 
 #define WINDOW_TITLE "OpenGL Window"
 
@@ -220,86 +220,107 @@ void drawFlag(int num)
 		glBegin(GL_QUADS);
 		{
 			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(-0.8f, -0.9f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(0.8f, -0.9f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(0.8f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(-0.8f, -0.8f);
+		}
+		glEnd();
 
-			glVertex2f(-0.9f, -0.9f);
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(-0.8f, 0.9f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(0.8f, 0.9f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(0.8f, 0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(-0.8f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(-0.9f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(-0.8f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(-0.8f, 0.8f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(-0.9f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(0.9f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(0.8f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(0.8f, 0.8f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(0.9f, 0.8f);
+		}
+		glEnd();
+
+		glBegin(GL_QUADS);
+		{
+			glColor4f(0, 0, 0, 0.1f);
 			glVertex2f(0.9f, -0.9f);
+			glColor4f(0, 0, 0, 0.1f);
 			glVertex2f(0.9f, -0.8f);
-			glVertex2f(-0.9f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(0.8f, -0.8f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(0.8f, -0.9f);
 		}
 		glEnd();
 
 		glBegin(GL_QUADS);
 		{
 			glColor4f(0, 0, 0, 0.1f);
-
-			glVertex2f(-0.9f, 0.9f);
 			glVertex2f(0.9f, 0.9f);
+			glColor4f(0, 0, 0, 0.1f);
 			glVertex2f(0.9f, 0.8f);
-			glVertex2f(-0.9f, 0.8f);
+			glColor4f(0, 0, 0, 0.0f);
+			glVertex2f(0.8f, 0.8f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(0.8f, 0.9f);
 		}
 		glEnd();
 
 		glBegin(GL_QUADS);
 		{
 			glColor4f(0, 0, 0, 0.1f);
-
+			glVertex2f(-0.9f, -0.9f);
+			glColor4f(0, 0, 0, 0.1f);
 			glVertex2f(-0.9f, -0.8f);
+			glColor4f(0, 0, 0, 0.0f);
 			glVertex2f(-0.8f, -0.8f);
-			glVertex2f(-0.8f, 0.8f);
-			glVertex2f(-0.9f, 0.8f);
+			glColor4f(0, 0, 0, 0.1f);
+			glVertex2f(-0.8f, -0.9f);
 		}
 		glEnd();
 
 		glBegin(GL_QUADS);
 		{
 			glColor4f(0, 0, 0, 0.1f);
-
-			glVertex2f(0.9f, -0.8f);
-			glVertex2f(0.8f, -0.8f);
-			glVertex2f(0.8f, 0.8f);
-			glVertex2f(0.9f, 0.8f);
-		}
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		{
+			glVertex2f(-0.9f, 0.9f);
 			glColor4f(0, 0, 0, 0.1f);
-
-			glVertex2f(0.7f, 0.8f);
-			glVertex2f(0.8f, 0.7f);
-			glVertex2f(0.8f, 0.8f);
-		}
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		{
-			glColor4f(0, 0, 0, 0.1f);
-
-			glVertex2f(-0.7f, 0.8f);
-			glVertex2f(-0.8f, 0.7f);
+			glVertex2f(-0.9f, 0.8f);
+			glColor4f(0, 0, 0, 0.0f);
 			glVertex2f(-0.8f, 0.8f);
-		}
-		glEnd();
-
-		glBegin(GL_TRIANGLES);
-		{
 			glColor4f(0, 0, 0, 0.1f);
-
-			glVertex2f(-0.7f, -0.8f);
-			glVertex2f(-0.8f, -0.7f);
-			glVertex2f(-0.8f, -0.8f);
+			glVertex2f(-0.8f, 0.9f);
 		}
 		glEnd();
 
-		glBegin(GL_TRIANGLES);
-		{
-			glColor4f(0, 0, 0, 0.1f);
-
-			glVertex2f(0.7f, -0.8f);
-			glVertex2f(0.8f, -0.7f);
-			glVertex2f(0.8f, -0.8f);
-		}
-		glEnd();
 
 		break;
 	case 3:
